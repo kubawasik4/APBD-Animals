@@ -2,7 +2,7 @@
 
 namespace AnimalsDbConnection.Repositores;
 
-public class AnimalsRepository : IAnimalsService
+public class AnimalsRepository : IAnimalsRepository
 {
     private readonly IAnimalsRepository _animalsRepository;
     public IConfiguration _configuration;

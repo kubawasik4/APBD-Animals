@@ -5,10 +5,11 @@ namespace AnimalsDbConnection.Repositores;
 public class AnimalsRepository : IAnimalsService
 {
     private readonly IAnimalsRepository _animalsRepository;
+    public IConfiguration _configuration;
 
-    public AnimalsService(IAnimalsRepository animalsRepository)
+    public AnimalsRepository(IConfiguration configuration)
     {
-        _animalsRepository = animalsRepository;
+        _configuration = configuration;
     }
     public IEnumerable<Animal> GetAnimals(string orderBy)
     {

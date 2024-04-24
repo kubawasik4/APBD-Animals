@@ -18,6 +18,7 @@ public class AnimalsRepository : IAnimalsRepository
         
         using (var connection = new SqlConnection(_configuration["ConnectionStrings:DefaultConnection"]))
         {
+            
             connection.Open();
 
             using (var cmd = new SqlCommand())

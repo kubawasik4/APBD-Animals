@@ -1,6 +1,17 @@
-﻿namespace AnimalsDbConnection.Validators;
+﻿using System.ComponentModel.DataAnnotations;
 
-public class StringValidator
+namespace AnimalsDbConnection.Validators;
+
+public class StringValidator : ValidationAttribute
 {
-    
+    public override bool IsValid(object value)
+    {
+        string stringValue = value as string;
+        if (stringValue.ToLower() == "string")
+        {
+            return false;
+        }
+
+        return true;
+    }
 }

@@ -11,4 +11,28 @@ public class AnimalsController : ControllerBase
     {
         _animalsService = animalsService;
     }
+
+    [HttpGet]
+    public IActionResult GetAnimals(string orderBy)
+    {
+        
+    }
+
+    [HttpPost]
+    public IActionResult AddAnimal(Animal animal)
+    {
+        
+    }
+
+    [HttpPut("{id:int}")]
+    public IActionResult UpdateAnimal(int id, Animal animal)
+    {
+        
+    }
+
+    [HttpDelete("{id:int}")]
+    public IActionResult DeleteAnimal(int id)
+    {
+        
+    }
 }

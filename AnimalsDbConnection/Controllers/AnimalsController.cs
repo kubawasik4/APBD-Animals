@@ -40,6 +40,13 @@ public class AnimalsController : ControllerBase
     [HttpDelete("{id:int}")]
     public IActionResult DeleteAnimal(int id)
     {
-        
+        var counter = _animalsService.DeleteAnimal(id);
+        if (counter == 1)
+        {
+            return Ok();
+        }
+
+        return NotFound();
+
     }
 }

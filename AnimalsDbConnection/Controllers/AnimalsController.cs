@@ -22,7 +22,8 @@ public class AnimalsController : ControllerBase
     [HttpPost]
     public IActionResult AddAnimal(Animal animal)
     {
-        
+        var counter = _animalsService.AddAnimal(animal);
+        return StatusCode(StatusCodes.Status201Created);
     }
 
     [HttpPut("{id:int}")]

@@ -29,7 +29,12 @@ public class AnimalsController : ControllerBase
     [HttpPut("{id:int}")]
     public IActionResult UpdateAnimal(int id, Animal animal)
     {
-        
+        var counter = _animalsService.UpdateAnimal(id, animal);
+        if (counter == 1)
+        {
+            return Ok();
+        }
+        return StatusCode(500, "Błąd podczas aktualizacji danych");
     }
 
     [HttpDelete("{id:int}")]

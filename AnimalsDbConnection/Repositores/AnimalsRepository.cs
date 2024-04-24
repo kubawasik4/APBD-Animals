@@ -85,8 +85,14 @@ public class AnimalsRepository : IAnimalsRepository
 
     public int DeleteAnimal(int idAnimal)
     {
-        return _animalsRepository.DeleteAnimal(idAnimal);
+        using var connection = new SqlConnection(_configuration["ConnectionStrings:DefaultConnection"]);
+        connection.Open();
+        
+        using var cmd = new SqlCommand();
+        cmd.Connection = connection;
+        cmd.CommandText = "DELETE FROM Animal WHERE IdAnimal = @IdAnimal";
+        cmd.Parameters.AddWithValue("@IdAnimal", idAnimal);
+        var counter = cmd.ExecuteNonQuery();
+        return counter;
     }
-    
-    
 }

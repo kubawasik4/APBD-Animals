@@ -49,7 +49,21 @@ public class AnimalsRepository : IAnimalsRepository
 
     public int AddAnimal(Animal animal)
     {
-        return _animalsRepository.AddAnimal(animal);
+        using var connection = new SqlConnection(_configuration["ConnectionStrings:DefaultConnection"]);
+        
+            connection.Open();
+
+            using var cmd = new SqlCommand();
+            
+                cmd.Connection = connection;
+                cmd.CommandText = "INSERT INTO Animal( Name, Description, Category, Area) VALUES( @Name, @Description, @Category, @Area)";
+                cmd.Parameters.AddWithValue("@IdAnimal", animal.IdAnimal);
+                cmd.Parameters.AddWithValue("@Name", animal.Name);
+                cmd.Parameters.AddWithValue("@Description", animal.Description);
+                cmd.Parameters.AddWithValue("@Category", animal.Category);
+                cmd.Parameters.AddWithValue("@Area", animal.Area);
+                var counter = cmd.ExecuteNonQuery();
+                return counter;
     }
 
     public int UpdateAnimal(int id,Animal animal)

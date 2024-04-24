@@ -68,7 +68,19 @@ public class AnimalsRepository : IAnimalsRepository
 
     public int UpdateAnimal(int id,Animal animal)
     {
-        return _animalsRepository.UpdateAnimal(id, animal);
+        using var connection = new SqlConnection(_configuration["ConnectionStrings:DefaultConnection"]);
+        connection.Open();
+        
+        using var cmd = new SqlCommand();
+        cmd.Connection = connection;
+        cmd.CommandText = $"UPDATE Animal SET Name=@Name, Description=@Description, Category=@Category, Area=@Area WHERE IdAnimal ={id}";
+        cmd.Parameters.AddWithValue("@IdAnimal", animal.IdAnimal);
+        cmd.Parameters.AddWithValue("@Name", animal.Name);
+        cmd.Parameters.AddWithValue("@Description", animal.Description);
+        cmd.Parameters.AddWithValue("@Category", animal.Category);
+        cmd.Parameters.AddWithValue("@Area", animal.Area);
+        var counter = cmd.ExecuteNonQuery();
+        return counter;
     }
 
     public int DeleteAnimal(int idAnimal)
